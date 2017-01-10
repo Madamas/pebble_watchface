@@ -1,0 +1,26 @@
+{
+    "author": "mrvadamas@gmail.com",
+    "dependencies": {},
+    "keywords": [],
+    "name": "eva-watchface",
+    "pebble": {
+        "displayName": "Eva Watchface",
+        "enableMultiJS": true,
+        "messageKeys": [],
+        "projectType": "native",
+        "resources": {
+            "media": []
+        },
+        "sdkVersion": "3",
+        "targetPlatforms": [
+            "aplite",
+            "basalt",
+            "chalk"
+        ],
+        "uuid": "737a543d-88b7-4891-8477-937eef892c34",
+        "watchapp": {
+            "watchface": true
+        }
+    },
+    "version": "1.0.0"
+}
