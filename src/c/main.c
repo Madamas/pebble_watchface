@@ -1,7 +1,7 @@
 #include <pebble.h>
 
 static Window *s_main_window;
-static Layer *s_date_layer,*s_simple_bg_layer;
+static Layer *s_date_layer;
 static TextLayer *s_time_layer,*s_day_label,*s_num_label;
 static char s_num_buffer[4], s_day_buffer[6];
 
