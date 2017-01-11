@@ -11,10 +11,28 @@
         "resources": {
             "media": [
                 {
-                    "file": "fonts/Sacco-SemiBold",
-                    "name": "RESOURCE_ID_FONT_SACCO_32",
+                    "file": "fonts/Sacco-SemiBold_24",
+                    "name": "RESOURCE_ID_FONT_SACCO_24",
                     "targetPlatforms": null,
                     "type": "font"
+                },
+                {
+                    "file": "images/Img_third",
+                    "name": "RESOURCE_ID_IMAGE_THIRD",
+                    "targetPlatforms": null,
+                    "type": "bitmap"
+                },
+                {
+                    "file": "images/Img_Second",
+                    "name": "RESOURCE_ID_IMAGE_SECOND",
+                    "targetPlatforms": null,
+                    "type": "bitmap"
+                },
+                {
+                    "file": "images/First",
+                    "name": "RESOURCE_ID_IMAGE_FIRST",
+                    "targetPlatforms": null,
+                    "type": "bitmap"
                 }
             ]
         },

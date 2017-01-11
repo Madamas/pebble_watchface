@@ -1,9 +1,13 @@
 #include <pebble.h>
-
+#define GColorWhite (GColor8){.argb=GColorWhiteARGB8}
+#define GColorLightGray (GColor8){.argb=GColorLightGrayARGB8}
 static Window *s_main_window;
 static Layer *s_date_layer;
 static TextLayer *s_time_layer,*s_day_label,*s_num_label;
 static char s_num_buffer[4], s_day_buffer[6];
+GFont custom_font;
+static BitmapLayer *s_background_layer;
+static GBitmap *s_background_bitmap;
 
 static void date_update_proc(Layer *layer, GContext *ctx) {
   time_t now = time(NULL);
@@ -39,7 +43,11 @@ static void main_window_load(Window *window) {
   
   Layer *window_layer = window_get_root_layer(window);
   GRect bounds = layer_get_bounds(window_layer);
-  GFont custom_font = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_SACCO_32));
+  s_background_bitmap = gbitmap_create_with_resource(RESOURCE_ID_RESOURCE_ID_IMAGE_THIRD);
+  s_background_layer = bitmap_layer_create(bounds);
+  bitmap_layer_set_bitmap(s_background_layer,s_background_bitmap);
+  layer_add_child(window_layer,bitmap_layer_get_layer(s_background_layer));
+  custom_font = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_RESOURCE_ID_FONT_SACCO_24));
   s_date_layer = layer_create(bounds);
   layer_set_update_proc(s_date_layer, date_update_proc);
   layer_add_child(window_layer, s_date_layer);
@@ -48,9 +56,9 @@ static void main_window_load(Window *window) {
     GRect(63, 114, 27, 20),
     GRect(50, 114, 27, 20)));
   text_layer_set_text(s_day_label, s_day_buffer);
-  //text_layer_set_background_color(s_day_label, GColorBlack);
-  text_layer_set_text_color(s_day_label, GColorBlack);
-  text_layer_set_font(s_day_label, fonts_get_system_font(custom_font));
+  text_layer_set_background_color(s_day_label, GColorClear);
+  text_layer_set_text_color(s_day_label, GColorLightGray);
+  text_layer_set_font(s_day_label, custom_font);
 
   layer_add_child(s_date_layer, text_layer_get_layer(s_day_label));
 
@@ -58,9 +66,9 @@ static void main_window_load(Window *window) {
     GRect(90, 114, 18, 20),
     GRect(80, 114, 18, 20)));
   text_layer_set_text(s_num_label, s_num_buffer);
-  //text_layer_set_background_color(s_num_label, GColorBlack);
-  text_layer_set_text_color(s_num_label, GColorBlack);
-  text_layer_set_font(s_num_label, fonts_get_system_font(custom_font));
+  text_layer_set_background_color(s_num_label, GColorClear);
+  text_layer_set_text_color(s_num_label, GColorLightGray);
+  text_layer_set_font(s_num_label, custom_font);
 
   layer_add_child(s_date_layer, text_layer_get_layer(s_num_label));
   
@@ -72,13 +80,13 @@ static void main_window_load(Window *window) {
 
   // Create the TextLayer with specific bounds
   s_time_layer = text_layer_create(
-      GRect(0, PBL_IF_ROUND_ELSE(58, 150), bounds.size.w, 50));
+      GRect(0, PBL_IF_ROUND_ELSE(58, 140), bounds.size.w, 50));
 
   // Improve the layout to be more like a watchface
   text_layer_set_background_color(s_time_layer, GColorClear);
-  text_layer_set_text_color(s_time_layer, GColorBlack);
+  text_layer_set_text_color(s_time_layer, GColorLightGray);
   text_layer_set_text(s_time_layer, "00:00");
-  text_layer_set_font(s_time_layer, fonts_get_system_font(custom_font));
+  text_layer_set_font(s_time_layer, custom_font);
   text_layer_set_text_alignment(s_time_layer, GTextAlignmentCenter);
 
   // Add it as a child layer to the Window's root layer
