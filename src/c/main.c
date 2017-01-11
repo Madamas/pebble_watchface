@@ -39,28 +39,28 @@ static void main_window_load(Window *window) {
   
   Layer *window_layer = window_get_root_layer(window);
   GRect bounds = layer_get_bounds(window_layer);
-  
+  GFont custom_font = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_SACCO_32));
   s_date_layer = layer_create(bounds);
   layer_set_update_proc(s_date_layer, date_update_proc);
   layer_add_child(window_layer, s_date_layer);
 
   s_day_label = text_layer_create(PBL_IF_ROUND_ELSE(
     GRect(63, 114, 27, 20),
-    GRect(46, 114, 27, 20)));
+    GRect(50, 114, 27, 20)));
   text_layer_set_text(s_day_label, s_day_buffer);
   //text_layer_set_background_color(s_day_label, GColorBlack);
   text_layer_set_text_color(s_day_label, GColorBlack);
-  //text_layer_set_font(s_day_label, fonts_get_system_font(FONT_KEY_GOTHIC_18));
+  text_layer_set_font(s_day_label, fonts_get_system_font(custom_font));
 
   layer_add_child(s_date_layer, text_layer_get_layer(s_day_label));
 
   s_num_label = text_layer_create(PBL_IF_ROUND_ELSE(
     GRect(90, 114, 18, 20),
-    GRect(73, 114, 18, 20)));
+    GRect(80, 114, 18, 20)));
   text_layer_set_text(s_num_label, s_num_buffer);
   //text_layer_set_background_color(s_num_label, GColorBlack);
   text_layer_set_text_color(s_num_label, GColorBlack);
-  //text_layer_set_font(s_num_label, fonts_get_system_font(FONT_KEY_GOTHIC_18_BOLD));
+  text_layer_set_font(s_num_label, fonts_get_system_font(custom_font));
 
   layer_add_child(s_date_layer, text_layer_get_layer(s_num_label));
   
@@ -78,7 +78,7 @@ static void main_window_load(Window *window) {
   text_layer_set_background_color(s_time_layer, GColorClear);
   text_layer_set_text_color(s_time_layer, GColorBlack);
   text_layer_set_text(s_time_layer, "00:00");
-  //text_layer_set_font(s_time_layer, fonts_get_system_font(FONT_KEY_BITHAM_42_BOLD));
+  text_layer_set_font(s_time_layer, fonts_get_system_font(custom_font));
   text_layer_set_text_alignment(s_time_layer, GTextAlignmentCenter);
 
   // Add it as a child layer to the Window's root layer
