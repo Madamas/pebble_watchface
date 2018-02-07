@@ -13,7 +13,7 @@ static void date_update_proc(Layer *layer, GContext *ctx) {
   time_t now = time(NULL);
   struct tm *t = localtime(&now);
 
-  strftime(s_day_buffer, sizeof(s_day_buffer), "%a", t);
+  strftime(s_day_buffer, sizeof(s_day_buffer), "%a",t);
   text_layer_set_text(s_day_label, s_day_buffer);
 
   strftime(s_num_buffer, sizeof(s_num_buffer), "%d", t);
